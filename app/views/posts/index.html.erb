@@ -1,11 +1,13 @@
 <!-- index posts -->
-
-
-<h1>User(s)</h1>
-<% @users.each do |user| %>
-  <h2><%= user.first_name %></h2>
-  <h2><%= user.last_name %></h2>
-  <h3><%= user.age %></h3>
-  <%= link_to 'User Profile', user_path(user) %>
+<h1>Post(s)</h1>
+<% @posts.each do |post| %>
+  <h4><%= "This is a post by #{@users.find(post.user_id).first_name} #{@users.find(post.user_id).last_name}" %></h4>
+  <p><%= post.content %></p>
+  <%= link_to 'View Post', post_path(post) %> 
+  <br />
 <% end %>
-
+<br />
+<% @users.each do |user| %>
+  <%= link_to "Create a New Post as #{user.first_name}", new_post_path(user_id: user.id) %>
+  <br />
+<% end %>
