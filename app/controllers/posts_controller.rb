@@ -10,6 +10,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments
+    @user = User.find(@post.user_id)
   end
 
   def edit
@@ -38,7 +40,8 @@ class PostsController < ApplicationController
     post = Post.find(params[:id])
     if post.destroy 
       redirect_to posts_path 
-      
+    else
+      redirect_to post_path(paths)  
     end
   end
 
